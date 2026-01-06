@@ -71,31 +71,32 @@ export default function RootLayout({ children }: RootLayoutProps) {
 
   // Allow environment control over whether the WX snippet can be changed by the client
   const forceDisableOverride = EnvTools.readValueAsBoolean("DISABLE_WX_SWITCHER", false);
-  
+
   // Check if services are enabled
   const ga_id = EnvTools.readValue("GA_TRACKING_ID");
   const enableGoogleAnalytics = ga_id && ga_id.trim() != "";
   const enableDemoTools = EnvTools.readValueAsBoolean("OPTIMIZELY_ONE_HELPER", false);
 
   return (
-    <html lang={ locale }>
+    <html lang={locale}>
       <head>
-        <Scripts.Header experimentationAllowOverride={ !forceDisableOverride } />
-        { enableDemoTools && <link key="dynamic-styles" rel="stylesheet" href="/main.css" ></link> }
+        <script src="https://cdn.optimizely.com/js/6737790596022272.js"></script>
+        <Scripts.Header experimentationAllowOverride={!forceDisableOverride} />
+        {enableDemoTools && <link key="dynamic-styles" rel="stylesheet" href="/main.css" ></link>}
       </head>
       <ThemeProvider value={{ theme: "system" }}>
         <Body className={`${figtree.className} on-ghost-white overflow-x-hidden`}>
           <OptimizelyOneProvider value={{ debug: false }} >
             <PageActivator />
             <div className="flex min-h-screen flex-col justify-between">
-              <Header locale={ locale } ctx={ ctx } />
-              <main className="grow">{ children }</main>
-              <Footer ctx={ ctx } />
+              <Header locale={locale} ctx={ctx} />
+              <main className="grow">{children}</main>
+              <Footer ctx={ctx} />
             </div>
             <OptimizelyOneGadget />
           </OptimizelyOneProvider>
           <Scripts.Footer />
-          { enableGoogleAnalytics && <GoogleAnalytics measurementId={ ga_id } /> }
+          {enableGoogleAnalytics && <GoogleAnalytics measurementId={ga_id} />}
           <SpeedInsights />
         </Body>
       </ThemeProvider>
