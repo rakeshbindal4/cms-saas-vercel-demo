@@ -80,7 +80,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang={locale}>
       <head>
-        <script src="https://cdn.optimizely.com/js/6737790596022272.js"></script>
+
         <Scripts.Header experimentationAllowOverride={!forceDisableOverride} />
         {enableDemoTools && <link key="dynamic-styles" rel="stylesheet" href="/main.css" ></link>}
       </head>
