@@ -7,7 +7,7 @@ import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import { factory } from '@/components/factory';
 import { createClient } from '@remkoj/optimizely-graph-client';
-
+import Script from "next/script";
 // Server side components
 import { EnvTools, Scripts, OptimizelyOneGadget } from "@remkoj/optimizely-one-nextjs/server";
 import { ServerContext } from "@remkoj/optimizely-cms-react/rsc";
@@ -82,7 +82,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <head>
         <Scripts.Header experimentationAllowOverride={!forceDisableOverride} />
         {enableDemoTools && <link key="dynamic-styles" rel="stylesheet" href="/main.css" ></link>}
-        {enableOptimizelyWeb && <script id="optimizely-web" src="https://cdn.optimizely.com/js/6737790596022272.js" strategy="beforeInteractive"></script>}
+        {enableOptimizelyWeb && <Script id="optimizely-web" src="https://cdn.optimizely.com/js/6737790596022272.js" strategy='afterInteractive' />}
       </head>
       <ThemeProvider value={{ theme: "system" }}>
         <Body className={`${figtree.className} on-ghost-white overflow-x-hidden`}>
