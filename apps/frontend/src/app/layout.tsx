@@ -76,13 +76,13 @@ export default function RootLayout({ children }: RootLayoutProps) {
   const ga_id = EnvTools.readValue("GA_TRACKING_ID");
   const enableGoogleAnalytics = ga_id && ga_id.trim() != "";
   const enableDemoTools = EnvTools.readValueAsBoolean("OPTIMIZELY_ONE_HELPER", false);
-
+  const enableOptimizelyWeb = true;
   return (
     <html lang={locale}>
       <head>
-
         <Scripts.Header experimentationAllowOverride={!forceDisableOverride} />
         {enableDemoTools && <link key="dynamic-styles" rel="stylesheet" href="/main.css" ></link>}
+        {enableOptimizelyWeb && <script id="optimizely-web" src="https://cdn.optimizely.com/js/6737790596022272.js"></script>}
       </head>
       <ThemeProvider value={{ theme: "system" }}>
         <Body className={`${figtree.className} on-ghost-white overflow-x-hidden`}>
